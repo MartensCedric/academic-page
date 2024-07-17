@@ -5,4 +5,4 @@ inline: true
 related_posts: false
 ---
 
-I started my Master's Degree.
+I started a master's degree.

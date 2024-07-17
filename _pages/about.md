@@ -2,7 +2,7 @@
 layout: about
 title: About
 permalink: /
-subtitle: 
+subtitle:
 
 profile:
   align: right
@@ -16,8 +16,8 @@ selected_papers: true # includes a list of papers marked as "selected={true}"
 social: true # includes social icons at the bottom of the page
 ---
 
-I am a PhD student at Université de Montréal supervised by <a href="https://www-labs.iro.umontreal.ca/~bmpix/">Mikhail Bessmeltsev</a>, in the computer graphics lab (<a href="http://www.ligum.umontreal.ca/">LIGUM</a>). 
+I am a PhD student at Université de Montréal supervised by <a href="https://www-labs.iro.umontreal.ca/~bmpix/">Mikhail Bessmeltsev</a>, in the computer graphics lab (<a href="http://www.ligum.umontreal.ca/">LIGUM</a>).
 
-My work is about geometry processing, accurately computing winding numbers.
+My research focuses on geometry processing, with a particular interest to winding numbers and signed distance fields.
 
-I completed a Bachelor's of Engineering in Software Engineering at Concordia University in 2022.
+I graduated from Concordia University in 2022 with a Bachelor of Engineering in Software Engineering.

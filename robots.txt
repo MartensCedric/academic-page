@@ -1,4 +1,4 @@
 User-agent: *
 Disallow:
 
-Sitemap: https://MartensCedric.github.io/sitemap.xml
+Sitemap: https://MartensCedric.github.ioacademic-page/sitemap.xml

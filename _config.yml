@@ -8,7 +8,7 @@ middle_name:
 last_name: Martens
 contact_note: >
   You can even add a little note about which of these is the best way to reach you.
-description:  > # the ">" symbol means to ignore newlines until "footer_text:"
+description: > # the ">" symbol means to ignore newlines until "footer_text:"
   I am a PhD student at Université de Montréal supervised by Mikhail Bessmeltsev, in the computer graphics lab (LIGUM).
 footer_text: >
 keywords: cedric, martens, academic, publications # add your own keywords or leave empty

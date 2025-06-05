@@ -5,7 +5,7 @@ layout: paper
 permalink: /publications/1s_wn
 nav: false
 
-description: We propose an alternative method to compute a generalized winding number, based only on the surface boundary and the intersections of a single ray with the surface. 
+description: We propose an alternative method to compute a generalized winding number, based only on the surface boundary and the intersections of a single ray with the surface.
 teaser: /assets/img/1s_wn/overview.pdf
 authors: Cedric Martens and Mikhail Bessmeltsev
 paper_info: Symposium on Geometry Processing 2025
@@ -18,7 +18,6 @@ _styles: >
     text-align: center;
     margin-bottom: 10px;
   }
-
 ---
 
   <style>
@@ -118,7 +117,7 @@ _styles: >
           margin-right: auto;
       }
     </style>
-    
+
 <header class="post-header">
   <h1 class="paper-title">{{ page.title }}</h1>
   
@@ -172,6 +171,7 @@ uses in a variety of applications, including voxelizations and boolean operation
 </div>
 
 ##### Citation
+
 ```
 @article{Martens2025WindingNumberOneShot,
   title = {One-Shot Method for Computing Generalized Winding Numbers},
@@ -183,10 +183,7 @@ uses in a variety of applications, including voxelizations and boolean operation
 }
 ```
 
-
 <article>
     <!-- Additional content sections would go here -->
     <!-- For example: Introduction, Methods, Results, etc. -->
 </article>
-
-

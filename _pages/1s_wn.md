@@ -166,7 +166,7 @@ uses in a variety of applications, including voxelizations and boolean operation
 <div class="links">
     <h1>Links</h1>
     <a href="https://www-labs.iro.umontreal.ca/~bmpix/one_shot/1S_GWN.pdf">Paper (PDF)</a>
-    <a href="">Code (Coming Soon)</a>
+    <a href="https://github.com/MartensCedric/one_shot_wn">Code</a>
     <a href="https://arxiv.org/abs/2408.04466">Preprint</a>
 </div>
 
@@ -177,6 +177,7 @@ uses in a variety of applications, including voxelizations and boolean operation
   title = {One-Shot Method for Computing Generalized Winding Numbers},
   author = {Martens, Cedric and Bessmeltsev, Mikhail},
   journal = {Computer Graphics Forum},
+  doi={10.1111/cgf.70194},
   volume = {44},
   number = {5},
   year = {2025},

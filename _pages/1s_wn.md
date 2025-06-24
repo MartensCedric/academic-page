@@ -9,7 +9,7 @@ description: We propose an alternative method to compute a generalized winding n
 teaser: /assets/img/1s_wn/overview.pdf
 authors: Cedric Martens and Mikhail Bessmeltsev
 paper_info: Symposium on Geometry Processing 2025
-date: 2025-06-03
+date: 2025-06-24
 
 _styles: >
   .bbb {
@@ -165,7 +165,7 @@ uses in a variety of applications, including voxelizations and boolean operation
 
 <div class="links">
     <h1>Links</h1>
-    <a href="https://www-labs.iro.umontreal.ca/~bmpix/one_shot/1S_GWN.pdf">Paper (PDF)</a>
+    <a href="https://www-labs.iro.umontreal.ca/~bmpix/one_shot/gwn.pdf">Paper (PDF)</a>
     <a href="https://github.com/MartensCedric/one_shot_wn">Code</a>
     <a href="https://arxiv.org/abs/2408.04466">Preprint</a>
 </div>
@@ -177,7 +177,7 @@ uses in a variety of applications, including voxelizations and boolean operation
   title = {One-Shot Method for Computing Generalized Winding Numbers},
   author = {Martens, Cedric and Bessmeltsev, Mikhail},
   journal = {Computer Graphics Forum},
-  doi={10.1111/cgf.70194},
+  doi = {10.1111/cgf.70194},
   volume = {44},
   number = {5},
   year = {2025},

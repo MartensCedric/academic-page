@@ -1,16 +1,17 @@
 # this file contains the social media links and usernames of the author
-# the commented lines are the default social media links supported by the template
 # the socials will be displayed in the order they are defined here
-
+# for more information, please refer to the documentation of jekyll-socials plugin: https://github.com/george-gca/jekyll-socials
+# cv_pdf: /assets/pdf/example_pdf.pdf # path to your CV PDF file
+email: cedric.martens@umontreal.ca # your email address
+github_username: MartensCedric # your GitHub user name
+scholar_userid: KxBEAaYAAAAJ # your Google Scholar ID
 # acm_id: # your dl.acm.org/profile/id
 # blogger_url: # your blogger URL
 # bluesky_url: # your bluesky URL
 # dblp_url: # your DBLP profile url
 # discord_id: # your discord id (18-digit unique numerical identifier)
-email: cedric.martens@umontreal.ca # your email address
 # facebook_id: # your facebook id
 # flickr_id: # your flickr id
-github_username: MartensCedric # your GitHub user name
 # gitlab_username: # your GitLab user name
 # ieee_id: # your ieeexplore.ieee.org/author/id
 # inspirehep_id: 1010907 # Inspire HEP author ID
@@ -30,7 +31,6 @@ github_username: MartensCedric # your GitHub user name
 # quora_username: # your Quora username
 # research_gate_profile: # your profile on ResearchGate
 # rss_icon: true # comment this line to hide the RSS icon
-scholar_userid: KxBEAaYAAAAJ # your Google Scholar ID
 # scopus_id: # your profile on Scopus
 # semanticscholar_id: # your Semantic Scholar ID
 # spotify_id: # your spotify id

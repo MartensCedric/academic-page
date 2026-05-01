@@ -24,8 +24,10 @@ latest_posts:
   limit: 3 # leave blank to include all the blog posts
 ---
 
-I am a PhD student at Université de Montréal supervised by <a href="https://www-labs.iro.umontreal.ca/~bmpix/">Mikhail Bessmeltsev</a>. I'm a member of the <a href="http://www.ligum.umontreal.ca/">LIGUM</a>.
+I am a Computer Graphics PhD student at Université de Montréal supervised by <a href="https://www-labs.iro.umontreal.ca/~bmpix/">Mikhail Bessmeltsev</a>. 
 
-My research focuses on geometry processing, with a particular interest to winding numbers and differentiable rendering.
 
-I graduated from Concordia University in 2022 with a Bachelor of Engineering in Software Engineering.
+My research focuses on geometry processing, with an interest to generalized winding numbers, and geometric optimization through differentiable rendering.
+
+
+In my free time, I enjoy reading, programming, and learning new things!

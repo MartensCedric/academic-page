@@ -1,15 +1,15 @@
 ---
-title: One-Shot Method for Computing Generalized Winding Numbers
+title: "The Antipodal Method: Fast, Accurate, and Robust 3D Generalized Winding Numbers"
 layout: paper
 
-permalink: /publications/1s_wn
+permalink: /publications/antipodal_wn
 nav: false
 
-description: We propose an alternative method to compute a generalized winding number, based only on the surface boundary and the intersections of a single ray with the surface.
-teaser: /assets/img/1s_wn/overview.pdf
-authors: Cedric Martens and Mikhail Bessmeltsev
-paper_info: Symposium on Geometry Processing 2025
-date: 2025-06-24
+description: We introduce the antipodal method, a fast and accurate algorithm for computing generalized winding numbers for meshes and parametric surfaces, achieving up to 22× speedup over precise CPU methods and 10⁹ queries/second on GPU.
+teaser: /assets/img/antipodal_wn/teaser.png
+authors: Cedric Martens, Philip Trettner, and Mikhail Bessmeltsev
+paper_info: ACM Transactions on Graphics (SIGGRAPH 2026)
+date: 2026-07-01
 
 _styles: >
   .bbb {
@@ -167,68 +167,59 @@ _styles: >
   
   <div class="author-container">
     <div class="author">
-        <a href="https://martenscedric.github.io/academic-page/">Cedric Martens</a>
+        <a href="https://martenscedric.github.io/academic-page/">Cedric Martens</a><sup>*,1</sup>
     </div>
     <div class="author">
-        <a href="http://www-labs.iro.umontreal.ca/~bmpix/">Mikhail Bessmeltsev</a>
+        Philip Trettner<sup>*,2</sup>
     </div>
+    <div class="author">
+        <a href="http://www-labs.iro.umontreal.ca/~bmpix/">Mikhail Bessmeltsev</a><sup>1</sup>
     </div>
-    <div class="affiliation">
-        Université de Montréal
-    </div>
+  </div>
+  <div class="affiliation">
+      <sup>1</sup> Université de Montréal &nbsp;&nbsp;&nbsp; <sup>2</sup> Shaped Code GmbH<br>
+      <small>* Equal Contribution</small>
+  </div>
 </header>
 
 <div class="teaser">
-    <img src="/academic-page/assets/img/1s_wn/overview.png">
-    <div class="teaser-caption">
-        Overview of the basic algorithm: Given a surface with a
-boundary (a), we project the boundary onto a unit sphere around
-the query point (b, blowup in c). The boundary splits the surface of
-the sphere into regions (d). We shoot a single ray through each of
-those regions, and compute the number of signed intersections χi
-of each ray with the surface.
-    </div>
+    <img src="/academic-page/assets/img/antipodal_wn/teaser.png">
 </div>
 
 <div class="abstract">
     <h1>Abstract</h1>
     <p>
-       The generalized winding number is an essential part of the geometry processing toolkit, allowing to quantify how much a given
-point is inside a surface, even when the surface has boundaries and noise. We propose a new universal method to compute
-a generalized winding number, based only on the surface boundary and the intersections of a single ray with the surface,
-supporting any oriented surface representations that support a ray intersection query. Due to the focus on the boundary, our
-algorithm has a unique set of properties. For 2D parametric curves, on a regular grid of query points, our method is up to 4×
-faster than the current state of the art, maintaining the same precision. In 3D, our method can compute a winding number of a
-surface without discretizing it, including parametric surfaces. For some meshes with many triangles and a simple boundary, our
-method is faster than the hierarchical evaluation of the generalized winding number while still being precise. Similarly, on some
-parametric surfaces with a simple boundary, our method can be faster than adaptive quadrature. We validate our algorithms
-theoretically, numerically, and by demonstrating a gallery of results on a variety of parametric surfaces and meshes, as well
-uses in a variety of applications, including voxelizations and boolean operations.
+        Generalized winding numbers provide a robust measure of point insidedness for 3D surfaces—whether open, self-intersecting, or non-manifold—and are central to numerous geometry processing tasks. However, existing methods trade off between accuracy and computational efficiency, limiting their use in interactive and large-scale applications.
+    </p>
+    <p>
+        We introduce a new formulation and algorithm for computing generalized winding numbers that is both fast and accurate to arbitrary precision, applicable to meshes and parametric surfaces. Our approach expresses the winding number as the sum of two intuitive geometric quantities: the signed number of ray–surface intersections and a boundary integral over the surface's projection onto the unit sphere. This insight leads to an efficient discretization that avoids expensive surface integrals and spherical arrangements.
+    </p>
+    <p>
+        For meshes, our method achieves average speedups of 22× on a CPU compared to the fastest precise methods and 3× compared to the fastest approximation method, while maintaining full precision. On a GPU, for moderately complex meshes we reach a throughput of 10⁹ queries per second, or 4K generalized winding number slices at 120 FPS (13× faster than a naïve GPU method). For parametric surfaces, our method is on average 5.6× faster than the state-of-the-art method, with the same precision. Our method naturally handles complex topologies and non-manifold inputs.
     </p>
 </div>
 
 <div class="links">
-    <a href="https://www-labs.iro.umontreal.ca/~bmpix/one_shot/gwn.pdf">📄 Paper</a>
-    <a href="https://github.com/MartensCedric/one_shot_wn">💻 Code</a>
-    <a href="https://arxiv.org/abs/2408.04466">📋 Preprint</a>
+    <a href="https://doi.org/10.1145/3811323">📄 Paper</a>
+    <a href="https://github.com/MartensCedric/antipodal">💻 Code</a>
 </div>
 
 ##### Citation
 
 <div class="citation-box">
 <button class="copy-btn" onclick="navigator.clipboard.writeText(this.nextElementSibling.textContent).then(() => { this.textContent = '✓ Copied'; setTimeout(() => this.textContent = 'Copy', 2000); })">Copy</button>
-<pre>@article{Martens2025WindingNumberOneShot,
-  title = {One-Shot Method for Computing Generalized Winding Numbers},
-  author = {Martens, Cedric and Bessmeltsev, Mikhail},
-  journal = {Computer Graphics Forum},
-  doi = {10.1111/cgf.70194},
-  volume = {44},
-  number = {5},
-  year = {2025},
+<pre>@article{Martens2026AntipodalWN,
+  title = {The Antipodal Method: Fast, Accurate, and Robust 3D Generalized Winding Numbers},
+  author = {Martens, Cedric and Trettner, Philip and Bessmeltsev, Mikhail},
+  journal = {ACM Transactions on Graphics},
+  volume = {45},
+  number = {4},
+  articleno = {43},
+  year = {2026},
+  month = jul,
+  doi = {10.1145/3811323},
 }</pre>
 </div>
 
 <article>
-    <!-- Additional content sections would go here -->
-    <!-- For example: Introduction, Methods, Results, etc. -->
 </article>

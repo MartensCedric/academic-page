@@ -10,6 +10,7 @@ teaser: /assets/img/1s_wn/overview.pdf
 authors: Cedric Martens and Mikhail Bessmeltsev
 paper_info: Symposium on Geometry Processing 2025
 date: 2025-06-24
+canonical_url: https://cedricmartens.com/publications/1s_wn
 
 _styles: >
   .bbb {

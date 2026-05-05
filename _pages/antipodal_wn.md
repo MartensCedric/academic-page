@@ -10,6 +10,7 @@ teaser: /assets/img/antipodal_wn/teaser.png
 authors: Cedric Martens, Philip Trettner, and Mikhail Bessmeltsev
 paper_info: ACM Transactions on Graphics (SIGGRAPH 2026)
 date: 2026-07-01
+canonical_url: https://cedricmartens.com/publications/antipodal_wn
 
 _styles: >
   .bbb {
@@ -170,7 +171,7 @@ _styles: >
         <a href="https://martenscedric.github.io/academic-page/">Cedric Martens</a><sup>*,1</sup>
     </div>
     <div class="author">
-        Philip Trettner<sup>*,2</sup>
+        <a href="https://www.graphics.rwth-aachen.de/person/248/">Philip Trettner</a><sup>*,2</sup>
     </div>
     <div class="author">
         <a href="http://www-labs.iro.umontreal.ca/~bmpix/">Mikhail Bessmeltsev</a><sup>1</sup>
@@ -200,7 +201,7 @@ _styles: >
 </div>
 
 <div class="links">
-    <a href="https://doi.org/10.1145/3811323">📄 Paper</a>
+    <a href="https://arxiv.org/abs/2605.01536">📄 Paper</a>
     <a href="https://github.com/MartensCedric/antipodal">💻 Code</a>
 </div>
 

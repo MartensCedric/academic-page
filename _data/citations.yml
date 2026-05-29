@@ -1,11 +1,15 @@
 metadata:
-  last_updated: '2026-05-06'
+  last_updated: '2026-05-29'
 papers:
+  KxBEAaYAAAAJ:MXK_kJrjxJIC:
+    citations: 0
+    title: 'The Antipodal Method: Fast, Accurate, and Robust 3D Generalized Winding Numbers'
+    year: '2026'
   KxBEAaYAAAAJ:UeHWp8X0CEIC:
     citations: 10
     title: Reconstruction of machine-made shapes from bitmap sketches
     year: '2023'
   KxBEAaYAAAAJ:qjMakFHDy7sC:
-    citations: 5
+    citations: 4
     title: "One\u2010Shot Method for Computing Generalized Winding Numbers"
     year: '2025'

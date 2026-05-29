@@ -9,6 +9,11 @@ VERTICES = CENTER + np.column_stack([radii * np.cos(angles), radii * np.sin(angl
 POINT_A = np.array([2.5, 2.0])  # inside  — rightward ray hits polygon once  (odd)
 POINT_B = np.array([0.3, 0.4])  # outside — rightward ray hits polygon twice (even)
 
-XLIM    = (-0.3, 5.5)
-YLIM    = (-0.6, 4.6)
-FIGSIZE = (3.5, 3.3)
+XLIM  = (-0.3, 5.5)
+YLIM  = (-0.6, 4.6)
+
+# All figures in this set share the same canvas: FIGSIZE is derived from the
+# canvas bounds and SCALE so the data aspect ratio is exact — no tight-crop
+# variance between figures.
+SCALE   = 0.60  # inches per data unit
+FIGSIZE = ((XLIM[1] - XLIM[0]) * SCALE, (YLIM[1] - YLIM[0]) * SCALE)

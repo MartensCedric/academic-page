@@ -16,7 +16,7 @@ from matplotlib.patches import FancyArrowPatch
 from scene import VERTICES, POINT_A, POINT_B, XLIM, YLIM, FIGSIZE
 from utils import (COLORS, setup_ax, save_fig,
                    draw_polygon, draw_labeled_point,
-                   add_direction_arrow,
+                   add_edge_arrow,
                    ray_signed_intersections_right)
 
 OUTPUT = os.path.normpath(os.path.join(
@@ -37,11 +37,9 @@ ax.set_ylim(*YLIM)
 # ── polygon (filled) ─────────────────────────────────────────────────────────
 draw_polygon(ax, VERTICES)
 
-# Add two CCW direction arrows on the polygon boundary
-xs = np.append(VERTICES[:, 0], VERTICES[0, 0])
-ys = np.append(VERTICES[:, 1], VERTICES[0, 1])
-add_direction_arrow(ax, xs, ys, frac=0.15, size=18)
-add_direction_arrow(ax, xs, ys, frac=0.62, size=18)
+# Add two CCW direction arrows at edge midpoints
+add_edge_arrow(ax, VERTICES[1], VERTICES[2], size=18)
+add_edge_arrow(ax, VERTICES[5], VERTICES[6], size=18)
 
 # ── rays + signed intersections ───────────────────────────────────────────────
 for point, pt_color, pt_label in [

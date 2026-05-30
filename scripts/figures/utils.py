@@ -89,6 +89,25 @@ def add_direction_arrow(ax, x, y, frac=0.25, size=12):
     )
 
 
+def add_edge_arrow(ax, v1, v2, size=12):
+    """Place an orientation arrow at the midpoint of the straight edge v1→v2."""
+    mx, my = (v1[0] + v2[0]) / 2, (v1[1] + v2[1]) / 2
+    dx, dy = v2[0] - v1[0], v2[1] - v1[1]
+    L = (dx ** 2 + dy ** 2) ** 0.5
+    if L < 1e-12:
+        return
+    ux, uy = dx / L, dy / L
+    sep = 0.12
+    ax.annotate(
+        "",
+        xy=(mx + ux * sep, my + uy * sep),
+        xytext=(mx - ux * sep, my - uy * sep),
+        arrowprops=dict(arrowstyle="-|>", color=COLORS["polygon_edge"],
+                        lw=2.0, mutation_scale=size),
+        zorder=5,
+    )
+
+
 def draw_polygon_edges(ax, vertices, skip_edge=None):
     """Draw polygon as individual edge segments (no fill). skip_edge omits one edge by index."""
     n = len(vertices)

@@ -157,6 +157,11 @@
   <script src="{{ '/assets/js/tooltips-setup.js' | relative_url | bust_file_cache }}"></script>
 {% endif %}
 
+{% if page.annotations %}
+  <!-- Inline annotations -->
+  <script defer src="{{ '/assets/js/annotations-setup.js' | relative_url | bust_file_cache }}"></script>
+{% endif %}
+
 {% if site.enable_medium_zoom %}
   <!-- Medium Zoom JS -->
   <script

@@ -1,0 +1,119 @@
+/*******************************************************************************
+ * Inline annotations.
+ * A small numbered marker rendered next to text. The note reveals on hover or
+ * keyboard focus, and pins open on click/tap (`.is-open`, toggled by JS).
+ * See _includes/annotation.liquid and assets/js/annotations-setup.js.
+ ******************************************************************************/
+
+.annotation {
+  position: relative;
+  display: inline;
+
+  .annotation-marker {
+    // Reset native button chrome.
+    appearance: none;
+    -webkit-appearance: none;
+    border: none;
+    background: none;
+    font: inherit;
+    margin: 0;
+
+    // Small superscript pill.
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    vertical-align: super;
+    box-sizing: border-box;
+    min-width: 1.1em;
+    height: 1.1em;
+    padding: 0 0.3em;
+    margin-left: 0.1em;
+    border-radius: 0.7em;
+    font-size: 0.7em;
+    line-height: 1;
+    font-weight: 600;
+    color: var(--global-card-bg-color);
+    background-color: var(--global-theme-color);
+    cursor: pointer;
+    user-select: none;
+    transition:
+      background-color 0.15s ease,
+      box-shadow 0.15s ease,
+      transform 0.1s ease;
+
+    // Keep the tap target comfortable on touch screens without disturbing
+    // surrounding text flow.
+    &::after {
+      content: "";
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 100%;
+      height: 100%;
+      min-width: 24px;
+      min-height: 24px;
+      transform: translate(-50%, -50%);
+    }
+
+    &:hover {
+      background-color: var(--global-hover-color);
+      transform: translateY(-1px);
+    }
+
+    &:focus-visible {
+      outline: 2px solid var(--global-theme-color);
+      outline-offset: 2px;
+    }
+  }
+
+  .annotation-content {
+    position: absolute;
+    top: calc(100% + 0.5em);
+    left: 0;
+    z-index: 20;
+
+    box-sizing: border-box;
+    width: max-content;
+    max-width: min(280px, 80vw);
+    padding: 0.6rem 0.75rem;
+
+    background-color: var(--global-card-bg-color);
+    color: var(--global-text-color);
+    border: 1px solid var(--global-divider-color);
+    border-radius: 6px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.18);
+
+    font-size: 0.85rem;
+    font-weight: 400;
+    line-height: 1.45;
+    text-align: left;
+    white-space: normal;
+    vertical-align: baseline;
+
+    visibility: hidden;
+    opacity: 0;
+    transform: translateY(-4px);
+    transition:
+      opacity 0.15s ease,
+      transform 0.15s ease,
+      visibility 0s linear 0.15s;
+
+    // Flipped above the marker by JS when there is no room below.
+    &.annotation-content--above {
+      top: auto;
+      bottom: calc(100% + 0.5em);
+    }
+  }
+
+  // Reveal: hover (desktop), keyboard focus, or pinned open (click/tap via JS).
+  &:hover .annotation-content,
+  &:focus-within .annotation-content,
+  &.is-open .annotation-content {
+    visibility: visible;
+    opacity: 1;
+    transform: translateY(0);
+    transition:
+      opacity 0.15s ease,
+      transform 0.15s ease;
+  }
+}

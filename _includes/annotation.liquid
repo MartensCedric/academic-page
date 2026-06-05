@@ -1,0 +1,11 @@
+{%- comment -%}
+  Inline annotation marker with a reveal-on-hover / tap-to-pin popover.
+
+  Usage (inline, hugging the preceding word — no leading space):
+    ...3D triangle meshes{% include annotation.liquid text="e.g. a scanned mesh with holes" %}.
+
+  The marker auto-numbers across the page. `text` is a single string; inline HTML
+  and $…$ math are fine, block markdown is not.
+{%- endcomment -%}
+{%- assign annotation_counter = annotation_counter | default: 0 | plus: 1 -%}
+<span class="annotation" data-annotation="{{ annotation_counter }}"><button type="button" class="annotation-marker" aria-expanded="false" aria-label="Annotation {{ annotation_counter }}">{{ annotation_counter }}</button><span class="annotation-content" role="tooltip">{{ include.text }}</span></span>

@@ -2,6 +2,7 @@ import os
 import matplotlib as mpl
 import matplotlib.pyplot as plt
 from matplotlib.patches import Polygon as MplPolygon
+from matplotlib.colors import LinearSegmentedColormap, Normalize
 
 mpl.rcParams["font.family"] = "sans-serif"
 mpl.rcParams["font.size"] = 13
@@ -13,7 +14,32 @@ COLORS = {
     "point_outside": "#27AE60",
     "ray": "#8E44AD",
     "background": "#FFFFFF",
+    # Generalized-winding-number field: low-saturation diverging ends.
+    "field_pos": "#6Fae8c",   # GWN = +1 (inside, soft green)
+    "field_neg": "#cf8b8b",   # GWN = -1 (soft red)
 }
+
+# Reusable diverging colormap for GWN fields: red (-1) → white (0) → green (+1).
+GWN_CMAP = LinearSegmentedColormap.from_list(
+    "gwn", [COLORS["field_neg"], COLORS["background"], COLORS["field_pos"]]
+)
+GWN_NORM = Normalize(vmin=-1.0, vmax=1.0)
+
+
+def add_gwn_colorbar(fig, cax, label="GWN"):
+    """Draw the GWN colorbar (ticks -1/0/+1) into the provided axes `cax`.
+
+    Ticks/labels sit on the right of the bar so nothing is clipped when the
+    colorbar is placed at the very left of a figure; `label` is a short title."""
+    sm = mpl.cm.ScalarMappable(norm=GWN_NORM, cmap=GWN_CMAP)
+    cb = fig.colorbar(sm, cax=cax, ticks=[-1, 0, 1])
+    cax.yaxis.set_ticks_position("right")
+    cax.yaxis.set_label_position("right")
+    cb.ax.tick_params(labelsize=10)
+    cb.outline.set_linewidth(0.8)
+    if label:
+        cax.set_title(label, fontsize=11, fontweight="bold", pad=6)
+    return cb
 
 def setup_ax(ax, fill_figure=True):
     """Configure ax for a clean figure.

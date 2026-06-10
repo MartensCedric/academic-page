@@ -58,4 +58,10 @@ To compute winding numbers, we can also use a raycasting technique. Instead of l
 
 ## Generalized Winding Numbers
 
-*Generalized winding numbers* are a relaxation of winding numbers to open curves. Instead of a discrete numbers of windings, we will use a fractional value. It's equivalent to the limit of taking a bunch of rays and computing the average value of the signed sum of intersections.
+*Generalized winding numbers* are a relaxation of winding numbers to open curves, resulting in decimal values instead of integers. They can be approximated by computing the average signed intersection value of multiple rays. Note that there are different ways to compute generalized winding numbers in 2D, but this article focuses on raycasting methods. 
+
+<div class="text-center">
+{% include figure.liquid path="assets/img/blog/one-shot-winding-numbers/fig6_gwn_field.svg" class="img-fluid rounded z-depth-1" max-width="720px" caption="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua." %}
+</div>
+
+In our paper (Martens, 2025), we propose a method to compute generalized winding numbers by shooting a single ray. Rather than shoot a large amount of rays, we shoot a single ray and compute a boundary term, in 2D it is simply the angle formed by the endpoints of the curve.

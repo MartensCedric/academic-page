@@ -216,6 +216,34 @@ def ray_segment_signed_crossings(P, origin, u):
     return total
 
 
+def ray_signed_hits(segments, origin, u):
+    """List of ``(x, y, sign)`` where the ray ``origin + s*u`` (s > 0) meets the curve.
+
+    Same sign convention as ``ray_segment_signed_crossings`` (CCW interior → +1), but
+    returns the actual crossing points so they can be plotted. Results are sorted by
+    distance ``s`` along the ray.
+    """
+    ox, oy = origin
+    ux, uy = u
+    nx, ny = -uy, ux
+    hits = []
+    for P in segments:
+        d = [nx * (P[i, 0] - ox) + ny * (P[i, 1] - oy) for i in range(4)]
+        if min(d) > 0 or max(d) < 0:   # convex hull excludes 0 — no crossing
+            continue
+        for t in bezier_clip_roots(d):
+            bx, by = eval_segment(P, t)
+            bx, by = float(bx), float(by)
+            s = ux * (bx - ox) + uy * (by - oy)
+            if s <= 0:
+                continue
+            tan = deriv_segment(P, t)
+            sign = 1 if (nx * tan[0] + ny * tan[1]) > 0 else -1
+            hits.append((s, bx, by, sign))
+    hits.sort(key=lambda h: h[0])
+    return [(bx, by, sign) for _s, bx, by, sign in hits]
+
+
 def gwn_at(segments, p, n_rays):
     """GWN estimate at point ``p`` = mean signed crossings over ``n_rays`` dirs."""
     angles = np.arange(n_rays) * (2 * np.pi / n_rays)

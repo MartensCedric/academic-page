@@ -14,6 +14,9 @@ COLORS = {
     "point_outside": "#27AE60",
     "ray": "#8E44AD",
     "background": "#FFFFFF",
+    # Signed ray/curve crossings: blue = +1, red = -1 (shared by fig5 and fig7).
+    "cross_pos": "#2980B9",
+    "cross_neg": "#E74C3C",
     # Generalized-winding-number field: low-saturation diverging ends.
     "field_pos": "#6Fae8c",   # GWN = +1 (inside, soft green)
     "field_neg": "#cf8b8b",   # GWN = -1 (soft red)

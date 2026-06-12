@@ -20,6 +20,7 @@ COLORS = {
     # Generalized-winding-number field: low-saturation diverging ends.
     "field_pos": "#6Fae8c",   # GWN = +1 (inside, soft green)
     "field_neg": "#cf8b8b",   # GWN = -1 (soft red)
+    "field_pos2": "#3a7a5e",  # GWN = +2 (deep green, for fields exceeding 1)
 }
 
 # Reusable diverging colormap for GWN fields: red (-1) → white (0) → green (+1).
@@ -29,13 +30,15 @@ GWN_CMAP = LinearSegmentedColormap.from_list(
 GWN_NORM = Normalize(vmin=-1.0, vmax=1.0)
 
 
-def add_gwn_colorbar(fig, cax, label="GWN"):
-    """Draw the GWN colorbar (ticks -1/0/+1) into the provided axes `cax`.
+def add_gwn_colorbar(fig, cax, label="GWN", cmap=GWN_CMAP, norm=GWN_NORM,
+                     ticks=(-1, 0, 1)):
+    """Draw the GWN colorbar (default ticks -1/0/+1) into the provided axes `cax`.
 
     Ticks/labels sit on the right of the bar so nothing is clipped when the
-    colorbar is placed at the very left of a figure; `label` is a short title."""
-    sm = mpl.cm.ScalarMappable(norm=GWN_NORM, cmap=GWN_CMAP)
-    cb = fig.colorbar(sm, cax=cax, ticks=[-1, 0, 1])
+    colorbar is placed at the very left of a figure; `label` is a short title.
+    Pass `cmap`/`norm`/`ticks` for fields whose range exceeds [-1, 1]."""
+    sm = mpl.cm.ScalarMappable(norm=norm, cmap=cmap)
+    cb = fig.colorbar(sm, cax=cax, ticks=list(ticks))
     cax.yaxis.set_ticks_position("right")
     cax.yaxis.set_label_position("right")
     cb.ax.tick_params(labelsize=10)

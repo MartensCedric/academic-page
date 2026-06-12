@@ -50,31 +50,33 @@ The *winding number* of a query point with respect to an **oriented** curve is t
 
 Winding numbers can be used to answer inside-outside queries. A point with a winding number of one is inside, and a point with a winding number of zero is outside. For values besides one and zero, we can use the non-zeror rule: consider all values as inside except zero which is inside.
 
-To compute winding numbers, we can also use a raycasting technique. Instead of looking at whether the total number of intersections is even or odd, we can look at the **signed sum** of these intersections.
+To compute winding numbers, we can also use a raycasting technique. Instead of looking at whether the total number of intersections is even or odd, we can look at the **number of signed intersections**. These intersections add +1 when the curve is going counter-clockwise and -1 when it is going clockwise with respect to the point.
 
 <div class="text-center">
-{% include figure.liquid path="assets/img/blog/one-shot-winding-numbers/fig5_signed_intersections.svg" class="img-fluid rounded z-depth-1" max-width="300px" caption="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor." %}
+{% include figure.liquid path="assets/img/blog/one-shot-winding-numbers/fig5_signed_intersections.svg" class="img-fluid rounded z-depth-1" max-width="300px" caption="Point A is inside because the number of signed intersections is 1. Point B is outside because the number of signed intersections is -1 + 1 = 0. The first intersection is going clockwise with respect to the point (-1) and the second one is going counter-clockwise (+1)." %}
 </div>
+
 
 ## Generalized Winding Numbers
 
-*Generalized winding numbers* (GWN) are a relaxation of winding numbers to open curves, resulting in decimal values instead of integers. They can be approximated by computing the average signed intersection value of multiple rays. Note that there are several other existing methods computing 2D GWNs, I cover this raycasting approach because it intuitively builds our One-Shot method.l 
+*Generalized winding numbers* (GWN) are a relaxation of winding numbers to open curves, resulting in decimal values instead of integers. They can be approximated by computing the average signed intersection value of multiple rays. Note that there are several other existing methods computing 2D GWNs, I cover this raycasting approach because it intuitively builds our One-Shot method.
 
 <div class="text-center">
 {% include figure.liquid path="assets/img/blog/one-shot-winding-numbers/fig6_gwn_field.svg" class="img-fluid rounded z-depth-1" max-width="720px" caption="Averaging the result of the raycasting approach leads to the Generalized Winding Number (GWN) as the number of rays increases." %}
 </div>
 
-In our paper (Martens, 2025), we propose a method to compute generalized winding numbers by shooting a single ray. Rather than shooting a multitude of rays, our approach shoots a ray and computes a boundary term, which in 2D is simply the angle between the endpoints, and then obtain the exact GWN of that query point.
+In our paper [(Martens, 2025)]({{ '/publications/1s_wn.html' | relative_url }}), we propose a method to compute generalized winding numbers that requires shooting a single ray and the angle between the endpoints.
 
-Why does the angle between the endpoints suffice? The key observation is that, as we **rotate** a ray around the query point, its signed-intersection count changes **only when the ray sweeps past an endpoint** of the curve. Everywhere else the count is constant, so the whole averaging-over-rays computation collapses to a single boundary term that depends only on the endpoints.
-
-<div class="text-center">
-{% include figure.liquid path="assets/img/blog/one-shot-winding-numbers/fig7a_sweep.svg" class="img-fluid rounded z-depth-1" max-width="820px" caption="A tangled open curve and a query point P. As the ray rotates it stabs the curve several times (blue = +1, red = −1), yet the signed sum S holds at +1 through both loops and every tangency — and only steps to +2 once the ray sweeps past an endpoint." %}
-</div>
-
-Summing this up over every ray direction at once, the two rays from P through the curve's endpoints carve the plane into sectors of constant signed count. The signed sum is the same for every ray within a sector, and the boundaries between sectors are exactly the endpoint directions.
+While the naive approach would be to shoot a multitude of rays and average them all, the key observation is that: **the number of signed intersections only changes at the endpoints**. 
 
 <div class="text-center">
-{% include figure.liquid path="assets/img/blog/one-shot-winding-numbers/fig7c_sectors.svg" class="img-fluid rounded z-depth-1" max-width="440px" caption="The two rays through the curve's endpoints split every direction into just two sectors of constant signed count: aim a ray into the upper sector and S = +2, into the lower one and S = +1. The sector boundaries are exactly the endpoint directions." %}
+{% include figure.liquid path="assets/img/blog/one-shot-winding-numbers/fig7a_sweep.svg" class="img-fluid rounded z-depth-1" max-width="820px" caption="As we rotate a ray around the query point, the number of signed intersections is constant (χ = 1) until we cross an endpoint (χ = 2)." %}
 </div>
+
+The number of signed intersections (χ) is constant within the two regions formed by the endpoints. Moreover, each region's χ differ by exactly one. Then, only a single ray is needed to compute the χ of both regions.
+
+<div class="text-center">
+{% include figure.liquid path="assets/img/blog/one-shot-winding-numbers/fig7c_sectors.svg" class="img-fluid rounded z-depth-1" max-width="440px" caption="Given a query point P and an open oriented curve, the endpoints of the curve define two regions where the number of signed intersections is constant." %}
+</div>
+
 

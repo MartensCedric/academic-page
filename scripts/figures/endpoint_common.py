@@ -38,10 +38,14 @@ def deg_dir(deg):
 
 # ── drawing ───────────────────────────────────────────────────────────────────
 def draw_curve(ax, segments=CURVE, arrow_frac=0.55, arrow_size=16):
+    """``arrow_frac`` may be a single fraction or a sequence of fractions, each
+    placing one orientation arrowhead along the curve."""
     x, y = polyline(segments, n=260)
     ax.plot(x, y, color=COLORS["polygon_edge"], lw=2.0, zorder=2,
             solid_capstyle="round")
-    add_direction_arrow(ax, x, y, frac=arrow_frac, size=arrow_size)
+    fracs = arrow_frac if np.iterable(arrow_frac) else (arrow_frac,)
+    for frac in fracs:
+        add_direction_arrow(ax, x, y, frac=frac, size=arrow_size)
     return x, y
 
 
@@ -70,7 +74,20 @@ def draw_ray_and_hits(ax, p, angle_deg, segments, ray_len, *, label_signs=False,
     Pass ``show_hits=False`` to draw only the ray (S is still returned).
     """
     ux, uy = deg_dir(angle_deg)
-    end = (p[0] + ux * ray_len, p[1] + uy * ray_len)
+    # Clip the ray to the axes box (with a small inset): annotate silently drops
+    # the whole arrow when its tip lies outside the axes, and a clipped tip keeps
+    # the arrowhead visible.
+    inset = 0.05
+    x0, x1 = ax.get_xlim()
+    y0, y1 = ax.get_ylim()
+    t = ray_len
+    for u, lo, hi, c in ((ux, x0 + inset, x1 - inset, p[0]),
+                         (uy, y0 + inset, y1 - inset, p[1])):
+        if u > 0:
+            t = min(t, (hi - c) / u)
+        elif u < 0:
+            t = min(t, (lo - c) / u)
+    end = (p[0] + ux * t, p[1] + uy * t)
     ax.annotate("", xy=end, xytext=(p[0], p[1]),
                 arrowprops=dict(arrowstyle="-|>", color=COLORS["ray"],
                                 lw=ray_lw, mutation_scale=13, alpha=ray_alpha),

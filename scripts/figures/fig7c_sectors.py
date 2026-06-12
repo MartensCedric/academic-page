@@ -28,7 +28,7 @@ YLIM = (-1.75, 1.75)
 RAY_LEN = 2.5
 WEDGE_R = 6.0
 
-d_lo, d_hi = sorted(endpoint_dirs(P_QUERY))   # ~5deg and ~177deg
+d_lo, d_hi = sorted(endpoint_dirs(P_QUERY))   # ~52deg and ~164deg
 
 fig, ax = plt.subplots(figsize=((XLIM[1] - XLIM[0]) * 0.86, (YLIM[1] - YLIM[0]) * 0.86))
 fig.patch.set_facecolor(COLORS["background"])
@@ -43,26 +43,28 @@ ax.add_patch(Wedge(P_QUERY, WEDGE_R, d_hi, d_lo + 360, facecolor=COLORS["field_p
                    alpha=0.18, edgecolor="none", zorder=0))
 
 # ── boundary rays through the endpoints (dashed) ─────────────────────────────
+# Long enough to pass through the endpoints and reach the axes edge, so the
+# dashed lines trace the full sector boundary (ax.plot clips them to the box).
 for deg in (d_lo, d_hi):
     ux, uy = deg_dir(deg)
-    ax.plot([P_QUERY[0], P_QUERY[0] + ux * RAY_LEN],
-            [P_QUERY[1], P_QUERY[1] + uy * RAY_LEN],
+    ax.plot([P_QUERY[0], P_QUERY[0] + ux * WEDGE_R],
+            [P_QUERY[1], P_QUERY[1] + uy * WEDGE_R],
             color=COLORS["polygon_edge"], lw=1.4, ls=(0, (4, 3)), zorder=3)
 
-# ── a couple of sample rays inside each sector ───────────────────────────────
-for deg in [60, 120, 235, 300]:
-    draw_ray_and_hits(ax, P_QUERY, deg, CURVE, RAY_LEN, show_hits=False,
+# ── two sample rays inside each sector (upper S=+2, lower S=+1) ──────────────
+for deg, length in [(90, RAY_LEN), (140, 2.9), (210, RAY_LEN), (330, RAY_LEN)]:
+    draw_ray_and_hits(ax, P_QUERY, deg, CURVE, length, marker_size=5,
                       ray_lw=1.2, ray_alpha=0.6)
 
 # ── curve, endpoints, query point ────────────────────────────────────────────
-draw_curve(ax, CURVE, arrow_frac=0.62, arrow_size=17)
+draw_curve(ax, CURVE, arrow_frac=(0.28, 0.62, 0.9), arrow_size=17)
 draw_endpoints(ax)
-draw_query_point(ax, P_QUERY, dx=-0.12, dy=0.16)
+draw_query_point(ax, P_QUERY, dx=-0.12, dy=-0.32)
 
 # ── sector labels ─────────────────────────────────────────────────────────────
-ax.text(-1.3, 1.4, "S = +2", fontsize=15, fontweight="bold",
+ax.text(-2.0, 1.35, "χ = +2", fontsize=15, fontweight="bold",
         color="#3f8a63", ha="center", zorder=8)
-ax.text(0.7, -1.5, "S = +1", fontsize=14, fontweight="bold",
+ax.text(-1.4, -1.25, "χ = +1", fontsize=14, fontweight="bold",
         color="#3f8a63", ha="center", zorder=8)
 
 save_fig(fig, OUTPUT)

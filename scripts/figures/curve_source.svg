@@ -1,8 +1,51 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!-- fig7 demo curve. Edit the path's d and/or move the query circle, then re-run
      the fig7 scripts. Transform to math space: x=(sx-250)/100, y=-(sy-160)/100. -->
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="-5.0 14.2 505.0 292.5" width="505.0" height="292.5">
-  <path id="curve" fill="none" stroke="#2C3E50" stroke-width="3"
-        d="M 470.00,135.00 C 457.50,147.50 422.50,202.50 395.00,210.00 C 367.50,217.50 336.67,183.33 305.00,180.00 C 273.33,176.67 215.00,175.83 205.00,190.00 C 195.00,204.17 223.33,253.33 245.00,265.00 C 266.67,276.67 311.67,274.17 335.00,260.00 C 358.33,245.83 385.83,207.00 385.00,180.00 C 384.17,153.00 355.83,116.33 330.00,98.00 C 304.17,79.67 259.17,63.00 230.00,70.00 C 200.83,77.00 157.50,118.33 155.00,140.00 C 152.50,161.67 195.00,201.67 215.00,200.00 C 235.00,198.33 276.67,154.17 275.00,130.00 C 273.33,105.83 233.33,65.83 205.00,55.00 C 176.67,44.17 135.00,50.00 105.00,65.00 C 75.00,80.00 38.33,131.67 25.00,145.00"/>
-  <circle id="query" cx="230.00" cy="155.00" r="5" fill="#8E44AD"/>
+
+<svg
+   viewBox="-5.0 14.2 505.0 292.5"
+   width="505.0"
+   height="292.5"
+   version="1.1"
+   id="svg1"
+   sodipodi:docname="curve_source.svg"
+   inkscape:version="1.4 (e7c3feb100, 2024-10-09)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs1" />
+  <sodipodi:namedview
+     id="namedview1"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:zoom="2.6461538"
+     inkscape:cx="252.63081"
+     inkscape:cy="146.25"
+     inkscape:window-width="1745"
+     inkscape:window-height="1020"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg1" />
+  <path
+     id="curve"
+     fill="none"
+     stroke="#2c3e50"
+     stroke-width="3"
+     d="M 445.81395,28.430233 C 480.55233,85.145349 443.66279,207.7907 395,210 c -28.47505,1.29277 -44.78013,0.48879 -90,-30 -30.81712,-20.77796 -67.93751,-74.32317 -112.47093,-47.06395 -56.35391,34.49462 90.91821,156.40057 153.80814,144.06976 C 389.69628,268.50442 388.54911,237.89226 385,180 381.79209,127.67334 301.15321,174.59755 330,98 346.15921,55.092077 238.42254,26.348988 225.84302,76.046512 211.57094,132.43081 149.88911,96.697755 142.52907,144.91279 136.44877,184.74433 160.98837,204.31535 215,200 272.02219,195.44412 305.3671,79.302275 205,55 175.52233,47.862457 133.86628,58.69186 103.86628,73.69186 73.866279,88.69186 38.33,123.35605 25,145"
+     sodipodi:nodetypes="csssssssssssc" />
+  <circle
+     id="query"
+     cx="291.97675"
+     cy="223.77907"
+     r="5"
+     fill="#8e44ad"
+     style="fill:#4444ad;fill-opacity:1" />
 </svg>

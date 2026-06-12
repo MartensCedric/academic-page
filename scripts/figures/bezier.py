@@ -41,6 +41,28 @@ def make_open_arc(center, radius, start_deg, sweep_deg, ccw=True, n_seg=4):
     return segments
 
 
+def catmull_rom(points, closed=False):
+    """Uniform Catmull-Rom spline through ``points`` as cubic bezier segments.
+
+    Returns a list of (4, 2) control-point arrays, one per consecutive point
+    pair (wrapping around when ``closed``). Uses the standard CR-to-bezier
+    handle map: the handle at each point is ``(next - prev) / 6``. Open curves
+    clamp the end tangents to the boundary points.
+    """
+    pts = [np.asarray(p, dtype=float) for p in points]
+    n = len(pts)
+    count = n if closed else n - 1
+    segs = []
+    for i in range(count):
+        p1 = pts[i]
+        p2 = pts[(i + 1) % n]
+        p0 = pts[(i - 1) % n] if (closed or i > 0) else p1
+        p3 = pts[(i + 2) % n] if (closed or i + 2 < n) else p2
+        segs.append(np.array([p1, p1 + (p2 - p0) / 6.0,
+                              p2 - (p3 - p1) / 6.0, p2]))
+    return segs
+
+
 # ── evaluation ────────────────────────────────────────────────────────────────
 def eval_segment(P, t):
     """De Casteljau evaluation of one cubic segment at scalar/array ``t``."""
@@ -252,6 +274,24 @@ def gwn_at(segments, p, n_rays):
         u = (np.cos(a), np.sin(a))
         acc += sum(ray_segment_signed_crossings(P, p, u) for P in segments)
     return acc / n_rays
+
+
+def gwn_field_exact(px, py, xs, ys):
+    """Exact GWN field of the polyline ``(px, py)`` on the grid ``xs`` × ``ys``.
+
+    Uses the turning-angle formula ``w(p) = (1/2π) Σ ∠(v_i - p, v_{i+1} - p)``:
+    each polyline edge contributes the signed angle it subtends at the query
+    point. Exact for the polyline, so dense samples of a smooth curve converge
+    to its GWN. A closed curve must repeat its first point at the end.
+    """
+    GX, GY = np.meshgrid(xs, ys)          # (ny, nx)
+    total = np.zeros_like(GX)
+    ax, ay = px[0] - GX, py[0] - GY
+    for i in range(1, len(px)):
+        bx, by = px[i] - GX, py[i] - GY
+        total += np.arctan2(ax * by - ay * bx, ax * bx + ay * by)
+        ax, ay = bx, by
+    return total / (2.0 * np.pi)
 
 
 def gwn_field(segments, xs, ys, n_rays):

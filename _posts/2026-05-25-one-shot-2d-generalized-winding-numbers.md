@@ -48,7 +48,7 @@ The *winding number* of a query point with respect to an **oriented** curve is t
 {% include figure.liquid path="assets/img/blog/one-shot-winding-numbers/fig4_winding_numbers.svg" class="img-fluid rounded z-depth-1" max-width="520px" caption="The winding number at a query point of an oriented curve is the number of times the curve winds around the point. Depending on the orientation of the curve, the winding number can be negative or of higher absolute value than 1. For a closed curve, winding numbers are always integer-valued." %}
 </div>
 
-Winding numbers can be used to answer inside-outside queries. A point with a winding number of one is inside, and a point with a winding number of zero is outside. For values besides one and zero, we can use the non-zeror rule: consider all values as inside except zero which is inside.
+Winding numbers can be used to answer inside-outside queries. A point with a winding number of one is inside, and a point with a winding number of zero is outside. For values other than one and zero, we can use the non-zero rule: consider all values as inside with the exception of zero being outside.
 
 To compute winding numbers, we can also use a raycasting technique. Instead of looking at whether the total number of intersections is even or odd, we can look at the **number of signed intersections**. These intersections add +1 when the curve is going counter-clockwise and -1 when it is going clockwise with respect to the point.
 
@@ -63,6 +63,12 @@ To compute winding numbers, we can also use a raycasting technique. Instead of l
 
 <div class="text-center">
 {% include figure.liquid path="assets/img/blog/one-shot-winding-numbers/fig6_gwn_field.svg" class="img-fluid rounded z-depth-1" max-width="720px" caption="Averaging the result of the raycasting approach leads to the Generalized Winding Number (GWN) as the number of rays increases." %}
+</div>
+
+GWNs are defined for any oriented curve. On closed curves they reproduce the integer-valued winding number field, while on open curves they produce a smooth field that can dip below zero or accumulate past one:
+
+<div class="text-center">
+{% include figure.liquid path="assets/img/blog/one-shot-winding-numbers/fig8_gwn_curves.svg" class="img-fluid rounded z-depth-1" max-width="720px" caption="GWN fields for three curves. Left: an open curve — the field is close to 1 inside and leaks smoothly through the gap. Middle: a closed self-intersecting curve recovers the integer winding numbers, +1 in the top loop and −1 in the bottom one. Right: an open spiral accumulates winding, exceeding 2 at its core." %}
 </div>
 
 In our paper [(Martens, 2025)]({{ '/publications/1s_wn.html' | relative_url }}), we propose a method to compute generalized winding numbers that requires shooting a single ray and the angle between the endpoints.

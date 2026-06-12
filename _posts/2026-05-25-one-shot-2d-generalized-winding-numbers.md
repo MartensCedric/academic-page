@@ -59,19 +59,19 @@ To compute winding numbers, we can also use a raycasting technique. Instead of l
 
 ## Generalized Winding Numbers
 
-*Generalized winding numbers* (GWN) are a relaxation of winding numbers to open curves, resulting in decimal values instead of integers. They can be approximated by computing the average signed intersection value of multiple rays. Note that there are several other existing methods computing 2D GWNs, I cover this raycasting approach because it intuitively builds our One-Shot method.
+*Generalized winding numbers* (GWN) are a relaxation of winding numbers to open curves. With closed curves they reproduce the same integer behavior as (regular) winding numbers, but on open curves they create a smooth field that is only discontinuous across the curve.
 
+<div class="text-center">
+{% include figure.liquid path="assets/img/blog/one-shot-winding-numbers/fig8_gwn_curves.svg" class="img-fluid rounded z-depth-1" max-width="720px" caption="The GWN field for three curves. Left: An open curve where the GWN value is close to 1 for points that are nearly inside; Middle: A closed curve with positive and negative integer GWN based on the winding direction around each enclosed region; Right: an open spiral that has GWN values exceeding 2." %}
+</div>
+
+Generalized Winding Numbers can be approximated by computing the average signed intersection value of multiple rays. Note that there are several other existing methods computing 2D GWNs, I cover this raycasting approach because it intuitively builds our One-Shot method.
+ 
 <div class="text-center">
 {% include figure.liquid path="assets/img/blog/one-shot-winding-numbers/fig6_gwn_field.svg" class="img-fluid rounded z-depth-1" max-width="720px" caption="Averaging the result of the raycasting approach leads to the Generalized Winding Number (GWN) as the number of rays increases." %}
 </div>
 
-GWNs are defined for any oriented curve. On closed curves they reproduce the integer-valued winding number field, while on open curves they produce a smooth field that can dip below zero or accumulate past one:
-
-<div class="text-center">
-{% include figure.liquid path="assets/img/blog/one-shot-winding-numbers/fig8_gwn_curves.svg" class="img-fluid rounded z-depth-1" max-width="720px" caption="GWN fields for three curves. Left: an open curve — the field is close to 1 inside and leaks smoothly through the gap. Middle: a closed self-intersecting curve recovers the integer winding numbers, +1 in the top loop and −1 in the bottom one. Right: an open spiral accumulates winding, exceeding 2 at its core." %}
-</div>
-
-In our paper [(Martens, 2025)]({{ '/publications/1s_wn.html' | relative_url }}), we propose a method to compute generalized winding numbers that requires shooting a single ray and the angle between the endpoints.
+In our paper [(Martens, 2025)]({{ '/publications/1s_wn.html' | relative_url }}), we propose a method to evaluate generalized winding numbers that only requires shooting a single ray and computing the angle between the endpoints.
 
 While the naive approach would be to shoot a multitude of rays and average them all, the key observation is that: **the number of signed intersections only changes at the endpoints**. 
 
@@ -79,10 +79,28 @@ While the naive approach would be to shoot a multitude of rays and average them 
 {% include figure.liquid path="assets/img/blog/one-shot-winding-numbers/fig7a_sweep.svg" class="img-fluid rounded z-depth-1" max-width="820px" caption="As we rotate a ray around the query point, the number of signed intersections is constant (χ = 1) until we cross an endpoint (χ = 2)." %}
 </div>
 
-The number of signed intersections (χ) is constant within the two regions formed by the endpoints. Moreover, each region's χ differ by exactly one. Then, only a single ray is needed to compute the χ of both regions.
+In other words, the endpoints divide the plane into two regions where all rays shot within the same region share the same number of signed intersections (χ). 
 
 <div class="text-center">
 {% include figure.liquid path="assets/img/blog/one-shot-winding-numbers/fig7c_sectors.svg" class="img-fluid rounded z-depth-1" max-width="440px" caption="Given a query point P and an open oriented curve, the endpoints of the curve define two regions where the number of signed intersections is constant." %}
 </div>
 
+Moreover, each region's χ differ by exactly one. Then, only a single ray is needed to compute the χ of both regions. As we rotate a ray counter-clockwise and encounter the start of the oriented curve, χ increases by 1, and it decreases by 1 when we encounter the endpoint. Then, with a single ray we can compute both χ values required to compute the Generalized Winding Number!
+
+## The One-Shot Method
+
+Putting this all together, what we conceptually want to compute is average sum of signed intersections that would be obtained by shooting nearly an infinite amount of rays. In practice, we only require a single ray to obtain the sum of signed intersections of both regions. To properly compute the GWN, we simply need to weight each χ with the region's size, which can be computed from the angle between the endpoints.
+
+$$
+w(p) = \frac{\theta_1}{2\pi}\,\chi_1 + \frac{\theta_2}{2\pi}\,\chi_2
+$$
+
+<div class="text-center">
+{% include figure.liquid path="assets/img/blog/one-shot-winding-numbers/fig9_angle_weights.svg" class="img-fluid rounded z-depth-1" max-width="440px" caption="The directions toward the two endpoints split the rays around the query point P into two angular sectors, θ₁ and θ₂ (with θ₁ + θ₂ = 2π). Weighting each region's signed-intersection count χ by its sector's angle gives the Generalized Winding Number." %}
+</div>
+
+## Misc
+
+- [One-Shot Method Project Website]({{ '/publications/1s_wn.html' | relative_url }})
+- [Perspectives on Winding Numbers](https://nzfeng.github.io/research/WNoDS/PerspectivesOnWindingNumbers.pdf)
 

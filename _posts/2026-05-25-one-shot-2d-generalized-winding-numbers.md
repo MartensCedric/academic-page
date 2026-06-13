@@ -85,18 +85,18 @@ In other words, the endpoints divide the plane into two regions where all rays s
 {% include figure.liquid path="assets/img/blog/one-shot-winding-numbers/fig7c_sectors.svg" class="img-fluid rounded z-depth-1" max-width="440px" caption="Given a query point P and an open oriented curve, the endpoints of the curve define two regions where the number of signed intersections is constant." %}
 </div>
 
-Moreover, each region's χ differ by exactly one. Then, only a single ray is needed to compute the χ of both regions. As we rotate a ray counter-clockwise and encounter the start of the oriented curve, χ increases by 1, and it decreases by 1 when we encounter the endpoint. Then, with a single ray we can compute both χ values required to compute the Generalized Winding Number!
+Moreover, each region's χ differs by exactly one. Then, only a single ray is needed to compute the χ of both regions. As we rotate a ray counter-clockwise and encounter the start of the oriented curve, χ increases by 1, and it decreases by 1 when we encounter the endpoint. Then, with a single ray we can compute both χ values required to compute the Generalized Winding Number!
 
 ## The One-Shot Method
 
-Putting this all together, what we conceptually want to compute is average sum of signed intersections that would be obtained by shooting nearly an infinite amount of rays. In practice, we only require a single ray to obtain the sum of signed intersections of both regions. To properly compute the GWN, we simply need to weight each χ with the region's size, which can be computed from the angle between the endpoints.
+Putting this all together, we conceptually want to compute the average sum of signed intersections, naively obtained by shooting nearly an infinite amount of rays. With the One-Shot method, only a single ray is required to obtain the sum of signed intersections (χ) constant in each of the two regions. To evaluate the GWN at a query point, we weight sum the χ value of each region's by the fraction of the circle that the region occupies, computed as the angle between endpoints in radians.
 
 $$
 w(p) = \frac{\theta_1}{2\pi}\,\chi_1 + \frac{\theta_2}{2\pi}\,\chi_2
 $$
 
 <div class="text-center">
-{% include figure.liquid path="assets/img/blog/one-shot-winding-numbers/fig9_angle_weights.svg" class="img-fluid rounded z-depth-1" max-width="440px" caption="The directions toward the two endpoints split the rays around the query point P into two angular sectors, θ₁ and θ₂ (with θ₁ + θ₂ = 2π). Weighting each region's signed-intersection count χ by its sector's angle gives the Generalized Winding Number." %}
+{% include figure.liquid path="assets/img/blog/one-shot-winding-numbers/fig9_angle_weights.svg" class="img-fluid rounded z-depth-1" max-width="440px" caption="The endpoints create two regions of angular length of θ₁ and θ₂ (with θ₁ + θ₂ = 2π). Within each region, the sum of signed intersections χ is constant and differs by exactly one across each region. " %}
 </div>
 
 ## Misc

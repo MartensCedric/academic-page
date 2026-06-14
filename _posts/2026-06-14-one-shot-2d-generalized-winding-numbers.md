@@ -104,6 +104,10 @@ $$
 {% include figure.liquid path="assets/img/blog/one-shot-winding-numbers/fig9_angle_weights.svg" class="img-fluid rounded z-depth-1" max-width="440px" caption="The endpoints create two regions of angular length of θ₁ and θ₂ (with θ₁ + θ₂ = 2π). Within each region, the sum of signed intersections χ is constant and differs by exactly one across each region. " %}
 </div>
 
+
+## Interactive Generalized Winding Number
+{% include gwn_bezier_applet.liquid %}
+
 ## What's Next
 
 That concludes the brief introduction to the One-Shot Method in 2D. If you are interested in knowing more about winding numbers, here are a few links:

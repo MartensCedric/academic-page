@@ -65,10 +65,10 @@ Similar to the earlier parity test, the direction of the ray is arbitrary. Given
 *Generalized winding numbers* (GWN) are a relaxation of winding numbers to open curves. For closed curves, the chosen ray direction does not affect the result, however, this is not true on open curves.
 
 <div class="text-center">
-{% include figure.liquid path="assets/img/blog/one-shot-winding-numbers/fig6_gwn_field.svg" class="img-fluid rounded z-depth-1" max-width="720px" caption="Left: Computing the winding number from a single ray results in an inconsistent result that depends on the ray direction. Instead, averaging the result of multiple rays (pictured: 5, 25) leads to a smoother field." %}
+{% include figure.liquid path="assets/img/blog/one-shot-winding-numbers/fig6_gwn_field.svg" class="img-fluid rounded z-depth-1" max-width="720px" caption="Left: Computing the winding number from a single ray results in an inconsistent result that depends on the ray direction. Instead, averaging the result of multiple rays (Middle, Right) leads to a smoother field." %}
 </div>
 
-Rather than considering a point as strictly inside or strictly outside, we can recover a continuous notion of insideness: Generalized Winding Numbers. This is expensive to compute via raycasting, but possible. Generalized Winding Numbers can be approximated by shooting a multitude of rays, creates a smooth field that is only discontinuous across the curve.
+Rather than considering a point as strictly inside or strictly outside, we can recover a continuous notion of insideness: Generalized Winding Numbers. They expensive to compute via naively raycasting, but possible. Generalized Winding Numbers can be approximated by shooting a multitude of rays, creating a smooth field that is only discontinuous across the curve.
 
 <div class="text-center">
 {% include figure.liquid path="assets/img/blog/one-shot-winding-numbers/fig8_gwn_curves.svg" class="img-fluid rounded z-depth-1" max-width="720px" caption="The GWN field for three curves. Left: An open curve where the GWN value is close to 1 for points that are nearly inside; Middle: A closed curve with positive and negative integer GWN based on the winding direction around each enclosed region; Right: an open spiral that has GWN values exceeding 2." %}

@@ -43,10 +43,10 @@ A good question here is: What even is "inside" for an open shape?
 
 Unlike the previous section that uses unoriented polygons, winding numbers require orientation. In addition, it is more advantageous here to see the shapes as oriented 2D curves.
 
-The *winding number* of a query point with respect to an **oriented** curve is the number of times that this curve winds around the point. This is a **signed** quantity, where the orientation of the curve matters. Let's look at a few examples:
+The *winding number* of a query point with respect to an **oriented** curve is the number of times that this curve winds around the point. This is a **signed** quantity, where the orientation of the curve matters. The location of the point matters. Let's look at a few examples:
 
 <div class="text-center">
-{% include figure.liquid path="assets/img/blog/one-shot-winding-numbers/fig4_winding_numbers.svg" class="img-fluid rounded z-depth-1" max-width="520px" caption="The winding number at a query point of an oriented curve is the number of times the curve winds around the point. Depending on the orientation of the curve, the winding number can be negative or of higher absolute value than 1. For a closed curve, winding numbers are always integer-valued." %}
+{% include figure.liquid path="assets/img/blog/one-shot-winding-numbers/fig4_winding_numbers.svg" class="img-fluid rounded z-depth-1" max-width="520px" caption="The winding number at a query point of an oriented curve is the number of times the curve winds around the point. When a point is outside, the winding number is zero (top-left). The sign of the winding number depends on the orientation of the curve (top-right, bottom-left). A curve can wind multiple times around a point (bottom-right). Winding numbers are always integer-valued." %}
 </div>
 
 Winding numbers can be used to answer inside-outside queries. A point with a winding number of one is inside, and a point with a winding number of zero is outside. For values other than one and zero, we can use the non-zero rule: consider all values as inside with the exception of zero being outside.

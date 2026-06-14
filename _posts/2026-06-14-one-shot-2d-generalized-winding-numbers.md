@@ -51,27 +51,31 @@ The *winding number* of a query point with respect to an **oriented** curve is t
 
 Winding numbers can be used to answer inside-outside queries. A point with a winding number of one is inside, and a point with a winding number of zero is outside. For values other than one and zero, we can use the non-zero rule: consider all values as inside with the exception of zero being outside.
 
-To compute winding numbers, we can also use a raycasting technique. Instead of looking at whether the total number of intersections is even or odd, we can look at the **number of signed intersections**. These intersections add +1 when the curve is going counter-clockwise and -1 when it is going clockwise with respect to the point.
+To compute winding numbers, we can also use a raycasting technique. Instead of computing the parity of the intersections, instead we look at the **number of signed intersections**. These intersections are signed: they add +1 when the ray intersects the curve in a counter-clockwise manner, and -1 clockwise. To clarify, for a ray shot towards the right, an intersection with the oriented curve going upwards is counter-clockwise (+1), if the curve goes downwards it is clockwise (-1). 
 
 <div class="text-center">
-{% include figure.liquid path="assets/img/blog/one-shot-winding-numbers/fig5_signed_intersections.svg" class="img-fluid rounded z-depth-1" max-width="300px" caption="Point A is inside because the number of signed intersections is 1. Point B is outside because the number of signed intersections is -1 + 1 = 0. The first intersection is going clockwise with respect to the point (-1) and the second one is going counter-clockwise (+1)." %}
+{% include figure.liquid path="assets/img/blog/one-shot-winding-numbers/fig5_signed_intersections.svg" class="img-fluid rounded z-depth-1" max-width="300px" caption="Point A is inside because the number of signed intersections is 1. Point B is outside because the number of signed intersections is -1 + 1 = 0. The first intersection is clockwise with respect to the ray (-1) and the second one is counter-clockwise (+1)." %}
 </div>
+
+Similar to the earlier parity test, the direction of the ray is arbitrary. Given a query point, the sum of signed intersections does not depend on the chosen ray direction.
 
 
 ## Generalized Winding Numbers
 
-*Generalized winding numbers* (GWN) are a relaxation of winding numbers to open curves. With closed curves they reproduce the same integer behavior as (regular) winding numbers, but on open curves they create a smooth field that is only discontinuous across the curve.
+*Generalized winding numbers* (GWN) are a relaxation of winding numbers to open curves. For closed curves, the chosen ray direction does not affect the result, however, this is not true on open curves.
+
+<div class="text-center">
+{% include figure.liquid path="assets/img/blog/one-shot-winding-numbers/fig6_gwn_field.svg" class="img-fluid rounded z-depth-1" max-width="720px" caption="Left: Computing the winding number from a single ray results in an inconsistent result that depends on the ray direction. Instead, averaging the result of multiple rays (pictured: 5, 25) leads to a smoother field." %}
+</div>
+
+Rather than considering a point as strictly inside or strictly outside, we can recover a continuous notion of insideness: Generalized Winding Numbers. This is expensive to compute via raycasting, but possible. Generalized Winding Numbers can be approximated by shooting a multitude of rays, creates a smooth field that is only discontinuous across the curve.
 
 <div class="text-center">
 {% include figure.liquid path="assets/img/blog/one-shot-winding-numbers/fig8_gwn_curves.svg" class="img-fluid rounded z-depth-1" max-width="720px" caption="The GWN field for three curves. Left: An open curve where the GWN value is close to 1 for points that are nearly inside; Middle: A closed curve with positive and negative integer GWN based on the winding direction around each enclosed region; Right: an open spiral that has GWN values exceeding 2." %}
 </div>
 
-Generalized Winding Numbers can be approximated by computing the average signed intersection value of multiple rays. Note that there are several other existing methods computing 2D GWNs; I cover this raycasting approach because it intuitively builds our One-Shot method.
+There are other existing methods computing 2D GWNs; I cover this raycasting approach because it intuitively builds our One-Shot method.
  
-<div class="text-center">
-{% include figure.liquid path="assets/img/blog/one-shot-winding-numbers/fig6_gwn_field.svg" class="img-fluid rounded z-depth-1" max-width="720px" caption="Averaging the result of the raycasting approach leads to the Generalized Winding Number (GWN) as the number of rays increases." %}
-</div>
-
 In our paper [(Martens, 2025)]({{ '/publications/1s_wn.html' | relative_url }}), we propose a method to evaluate generalized winding numbers that only requires shooting a single ray and computing the angle between the endpoints.
 
 While the naive approach would be to shoot a multitude of rays and average them all, the key observation is that: **the number of signed intersections only changes at the endpoints**. 

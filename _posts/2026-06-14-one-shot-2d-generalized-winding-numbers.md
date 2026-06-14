@@ -2,12 +2,13 @@
 layout: post
 title: The One-Shot Method in 2D
 short_name: One-Shot in 2D
-date: 2026-05-25 12:00:00-0400
+date: 2026-06-14 12:00:00-0400
 description: >
 tags: geometry math
 categories:
 related_posts: false
 annotations: true
+permalink: /blog/one_shot_2d_gwn/
 ---
 
 ## Inside-Outside Tests
@@ -28,7 +29,7 @@ A solution: shoot a ray originating at the query point, in any direction, and co
 
 ## Open Geometry
 
-Geometry in computer graphics is not guaranteed to be closed. In practice, we encounter *open* shapes that do not partition the space in inside and outside regions, this is especially true for 3D meshes{% include annotation.liquid text="Nearly 15% of the models used in the 3D printing community are open, as demonstrated by the Thingi10K dataset (Zhou, 2016)." %}. The even-odd rule algorithm breaks down on open shapes, the gaps remove intended intersections, leading to an incorrect containment result.
+Geometry in computer graphics is not guaranteed to be closed. In practice, we encounter *open* shapes that do not partition the space into inside and outside regions, this is especially true for 3D meshes{% include annotation.liquid text="Nearly 15% of the 3D printing models in the Thingi10K dataset (Zhou, 2016) are open surfaces." %}. The even-odd rule algorithm breaks down on open shapes, the gaps remove intersections, leading to an incorrect containment result.
 
 <div class="text-center">
 {% include figure.liquid path="assets/img/blog/one-shot-winding-numbers/fig3_gap.svg" class="img-fluid rounded z-depth-1" max-width="300px" caption="The even-odd rule algorithm requires closed shapes." %}
@@ -42,7 +43,7 @@ A good question here is: What even is "inside" for an open shape?
 
 Unlike the previous section that uses unoriented polygons, winding numbers require orientation. In addition, it is more advantageous here to see the shapes as oriented 2D curves.
 
-The *winding number* of a query point with respect to an **oriented** curve is the number of times that  this curve winds around the point. This is a **signed** quantity, where the orientation of the curve matters. Let's look at a few examples:
+The *winding number* of a query point with respect to an **oriented** curve is the number of times that this curve winds around the point. This is a **signed** quantity, where the orientation of the curve matters. Let's look at a few examples:
 
 <div class="text-center">
 {% include figure.liquid path="assets/img/blog/one-shot-winding-numbers/fig4_winding_numbers.svg" class="img-fluid rounded z-depth-1" max-width="520px" caption="The winding number at a query point of an oriented curve is the number of times the curve winds around the point. Depending on the orientation of the curve, the winding number can be negative or of higher absolute value than 1. For a closed curve, winding numbers are always integer-valued." %}
@@ -65,7 +66,7 @@ To compute winding numbers, we can also use a raycasting technique. Instead of l
 {% include figure.liquid path="assets/img/blog/one-shot-winding-numbers/fig8_gwn_curves.svg" class="img-fluid rounded z-depth-1" max-width="720px" caption="The GWN field for three curves. Left: An open curve where the GWN value is close to 1 for points that are nearly inside; Middle: A closed curve with positive and negative integer GWN based on the winding direction around each enclosed region; Right: an open spiral that has GWN values exceeding 2." %}
 </div>
 
-Generalized Winding Numbers can be approximated by computing the average signed intersection value of multiple rays. Note that there are several other existing methods computing 2D GWNs, I cover this raycasting approach because it intuitively builds our One-Shot method.
+Generalized Winding Numbers can be approximated by computing the average signed intersection value of multiple rays. Note that there are several other existing methods computing 2D GWNs; I cover this raycasting approach because it intuitively builds our One-Shot method.
  
 <div class="text-center">
 {% include figure.liquid path="assets/img/blog/one-shot-winding-numbers/fig6_gwn_field.svg" class="img-fluid rounded z-depth-1" max-width="720px" caption="Averaging the result of the raycasting approach leads to the Generalized Winding Number (GWN) as the number of rays increases." %}
@@ -89,7 +90,7 @@ Moreover, each region's χ differs by exactly one. Then, only a single ray is ne
 
 ## The One-Shot Method
 
-Putting this all together, we conceptually want to compute the average sum of signed intersections, naively obtained by shooting nearly an infinite amount of rays. With the One-Shot method, only a single ray is required to obtain the sum of signed intersections (χ) constant in each of the two regions. To evaluate the GWN at a query point, we weight sum the χ value of each region's by the fraction of the circle that the region occupies, computed as the angle between endpoints in radians.
+Putting this all together, we conceptually want to compute the average number of signed intersections, naively obtained by shooting nearly an infinite amount of rays. With the One-Shot method, only a single ray is required to compute the sum of signed intersections (χ) constant in each of the two regions. To evaluate the GWN at a query point, we weighted-sum the χ values of each region by the fraction of the circle that the region occupies, computed as the angle between endpoints in radians.
 
 $$
 w(p) = \frac{\theta_1}{2\pi}\,\chi_1 + \frac{\theta_2}{2\pi}\,\chi_2
@@ -99,7 +100,9 @@ $$
 {% include figure.liquid path="assets/img/blog/one-shot-winding-numbers/fig9_angle_weights.svg" class="img-fluid rounded z-depth-1" max-width="440px" caption="The endpoints create two regions of angular length of θ₁ and θ₂ (with θ₁ + θ₂ = 2π). Within each region, the sum of signed intersections χ is constant and differs by exactly one across each region. " %}
 </div>
 
-## Misc
+## What's Next
+
+That concludes the brief introduction to the One-Shot Method in 2D. If you are interested in knowing more about winding numbers, here are a few links:
 
 - [One-Shot Method Project Website]({{ '/publications/1s_wn.html' | relative_url }})
 - [Perspectives on Winding Numbers](https://nzfeng.github.io/research/WNoDS/PerspectivesOnWindingNumbers.pdf)

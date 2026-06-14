@@ -104,6 +104,7 @@ $$
 
 That concludes the brief introduction to the One-Shot Method in 2D. If you are interested in knowing more about winding numbers, here are a few links:
 
-- [One-Shot Method Project Website]({{ '/publications/1s_wn.html' | relative_url }})
+- [One-Shot Method Website]({{ '/publications/1s_wn.html' | relative_url }})
 - [Perspectives on Winding Numbers](https://nzfeng.github.io/research/WNoDS/PerspectivesOnWindingNumbers.pdf)
+- [The Antipodal Method Website](https://martenscedric.github.io/academic-page/publications/antipodal_wn.html)
 

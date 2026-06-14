@@ -37,15 +37,15 @@ def deg_dir(deg):
 
 
 # ── drawing ───────────────────────────────────────────────────────────────────
-def draw_curve(ax, segments=CURVE, arrow_frac=0.55, arrow_size=16):
+def draw_curve(ax, segments=CURVE, arrow_frac=0.55, arrow_size=16, alpha=1.0):
     """``arrow_frac`` may be a single fraction or a sequence of fractions, each
     placing one orientation arrowhead along the curve."""
     x, y = polyline(segments, n=260)
     ax.plot(x, y, color=COLORS["polygon_edge"], lw=2.0, zorder=2,
-            solid_capstyle="round")
+            solid_capstyle="round", alpha=alpha)
     fracs = arrow_frac if np.iterable(arrow_frac) else (arrow_frac,)
     for frac in fracs:
-        add_direction_arrow(ax, x, y, frac=frac, size=arrow_size)
+        add_direction_arrow(ax, x, y, frac=frac, size=arrow_size, alpha=alpha)
     return x, y
 
 

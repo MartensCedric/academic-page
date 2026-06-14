@@ -66,15 +66,15 @@ for r, a0, a1, label, label_r in [
                       edgecolor="none", alpha=0.85))
 
 # ── curve, endpoints, query point ────────────────────────────────────────────
-draw_curve(ax, CURVE, arrow_frac=(0.28, 0.62, 0.9), arrow_size=17)
+draw_curve(ax, CURVE, arrow_frac=(0.28, 0.62, 0.9), arrow_size=17, alpha=0.2)
 draw_endpoints(ax)
 draw_query_point(ax, P_QUERY, dx=-0.12, dy=-0.32)
 
 # ── sector labels (subscripts match the One-Shot formula) ────────────────────
-ax.text(-2.0, 1.35, "χ₁ = +2", fontsize=15, fontweight="bold",
-        color="#3f8a63", ha="center", zorder=8)
-ax.text(-1.4, -1.25, "χ₂ = +1", fontsize=14, fontweight="bold",
-        color="#3f8a63", ha="center", zorder=8)
+ax.text(-2.4, 1.52, "χ₁ = +2", fontsize=15, fontweight="bold",
+        color="#3f8a63", ha="left", va="top", zorder=8)
+ax.text(-2.4, -1.52, "χ₂ = +1", fontsize=14, fontweight="bold",
+        color="#3f8a63", ha="left", va="bottom", zorder=8)
 
 save_fig(fig, OUTPUT)
 if "--png" in sys.argv:   # dev preview

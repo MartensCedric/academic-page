@@ -87,7 +87,7 @@ def draw_labeled_point(ax, point, label, color):
             fontsize=15, fontweight="bold", color=color, zorder=4)
 
 
-def add_direction_arrow(ax, x, y, frac=0.25, size=12):
+def add_direction_arrow(ax, x, y, frac=0.25, size=12, alpha=1.0):
     """Place an orientation arrowhead at fractional position along curve (x, y).
 
     size controls the arrowhead display size (mutation_scale); increase for
@@ -116,7 +116,7 @@ def add_direction_arrow(ax, x, y, frac=0.25, size=12):
         xy=(float(x[i]) + ux * sep, float(y[i]) + uy * sep),
         xytext=(float(x[i]) - ux * sep, float(y[i]) - uy * sep),
         arrowprops=dict(arrowstyle="-|>", color=COLORS["polygon_edge"],
-                        lw=2.0, mutation_scale=size),
+                        lw=2.0, mutation_scale=size, alpha=alpha),
         zorder=5,
     )
 

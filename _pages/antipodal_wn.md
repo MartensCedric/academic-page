@@ -184,7 +184,7 @@ _styles: >
 </header>
 
 <div class="teaser">
-    <img src="/academic-page/assets/img/antipodal_wn/teaser.png">
+    <img src="/assets/img/antipodal_wn/teaser.png">
 </div>
 
 <div class="abstract">

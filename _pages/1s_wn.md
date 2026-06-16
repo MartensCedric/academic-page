@@ -180,7 +180,7 @@ _styles: >
 </header>
 
 <div class="teaser">
-    <img src="/academic-page/assets/img/1s_wn/overview.png">
+    <img src="/assets/img/1s_wn/overview.png">
     <div class="teaser-caption">
         Overview of the basic algorithm: Given a surface with a
 boundary (a), we project the boundary onto a unit sphere around
@@ -212,6 +212,7 @@ uses in a variety of applications, including voxelizations and boolean operation
     <a href="https://www-labs.iro.umontreal.ca/~bmpix/one_shot/gwn.pdf">📄 Paper</a>
     <a href="https://github.com/MartensCedric/one_shot_wn">💻 Code</a>
     <a href="https://arxiv.org/abs/2408.04466">📋 Preprint</a>
+    <a href="/blog/one_shot_2d_gwn/">📝 Blog Post</a>
 </div>
 
 ##### Citation

@@ -68,13 +68,13 @@ Similar to the earlier parity test, the direction of the ray is arbitrary. Given
 {% include figure.liquid path="assets/img/blog/one-shot-winding-numbers/fig6_gwn_field.svg" class="img-fluid rounded z-depth-1" max-width="720px" caption="Left: Computing the winding number from a single ray results in an inconsistent result that depends on the ray direction. Instead, averaging the result of multiple rays (Middle, Right) leads to a smoother field." %}
 </div>
 
-Rather than considering a point as strictly inside or strictly outside, we can recover a continuous notion of insideness: Generalized Winding Numbers. They expensive to compute via naively raycasting, but possible. Generalized Winding Numbers can be approximated by shooting a multitude of rays, creating a smooth field that is only discontinuous across the curve.
+Rather than considering a point as strictly inside or strictly outside, we can recover a continuous notion of insideness: Generalized Winding Numbers. They are expensive to compute via naive raycasting, but possible. Generalized Winding Numbers can be approximated by shooting a multitude of rays, creating a smooth field that is only discontinuous across the curve.
 
 <div class="text-center">
 {% include figure.liquid path="assets/img/blog/one-shot-winding-numbers/fig8_gwn_curves.svg" class="img-fluid rounded z-depth-1" max-width="720px" caption="The GWN field for three curves. Left: An open curve where the GWN value is close to 1 for points that are nearly inside; Middle: A closed curve with positive and negative integer GWN based on the winding direction around each enclosed region; Right: an open spiral that has GWN values exceeding 2." %}
 </div>
 
-There are other existing methods computing 2D GWNs; I cover this raycasting approach because it intuitively builds our One-Shot method.
+There are other existing methods for computing 2D GWNs; I cover this raycasting approach because it intuitively builds our One-Shot method.
  
 In our paper [(Martens, 2025)]({{ '/publications/1s_wn.html' | relative_url }}), we propose a method to evaluate generalized winding numbers that only requires shooting a single ray and computing the angle between the endpoints.
 
@@ -94,7 +94,7 @@ Moreover, each region's χ differs by exactly one. Then, only a single ray is ne
 
 ## The One-Shot Method
 
-Putting this all together, we conceptually want to compute the average number of signed intersections, naively obtained by shooting nearly an infinite amount of rays. With the One-Shot method, only a single ray is required to compute the sum of signed intersections (χ) constant in each of the two regions. To evaluate the GWN at a query point, we weighted-sum the χ values of each region by the fraction of the circle that the region occupies, computed as the angle between endpoints in radians.
+Putting this all together, we conceptually want to compute the average number of signed intersections, naively obtained by shooting nearly an infinite amount of rays. With the One-Shot method, only a single ray is required to compute the sum of signed intersections (χ) constant in each of the two regions. To evaluate the GWN at a query point, we weight-sum the χ values of each region by the fraction of the circle that the region occupies, computed as the angle between endpoints in radians.
 
 $$
 w(p) = \frac{\theta_1}{2\pi}\,\chi_1 + \frac{\theta_2}{2\pi}\,\chi_2

@@ -87,10 +87,10 @@ ys = np.linspace(BOUNDS[0], BOUNDS[1], RES)
 
 # ── figure layout: [colorbar | panel | panel | panel] ────────────────────────
 PANEL_IN = 2.4
-fig = plt.figure(figsize=(PANEL_IN * 3 + 0.9, PANEL_IN + 0.25))
+fig = plt.figure(figsize=(PANEL_IN * 3 + 0.9, PANEL_IN + 0.5))
 fig.patch.set_facecolor(COLORS["background"])
 gs = GridSpec(1, 4, width_ratios=[0.05, 1, 1, 1], wspace=0.22,
-              left=0.035, right=0.98, top=0.93, bottom=0.05)
+              left=0.035, right=0.98, top=0.88, bottom=0.05)
 
 cax = fig.add_subplot(gs[0, 0])
 

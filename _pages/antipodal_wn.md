@@ -33,8 +33,15 @@ _styles: >
         
         .paper-title {
             text-align: center;
-            margin-bottom: 30px;
+            margin-bottom: 10px;
             font-size: 32px;
+        }
+        
+        .venue {
+            text-align: center;
+            font-size: 19px;
+            color: #555;
+            margin-bottom: 25px;
         }
         
         .author-container {
@@ -165,6 +172,7 @@ _styles: >
 
 <header class="post-header">
   <h1 class="paper-title">{{ page.title }}</h1>
+  <div class="venue">SIGGRAPH 2026</div>
   
   <div class="author-container">
     <div class="author">
@@ -201,7 +209,8 @@ _styles: >
 </div>
 
 <div class="links">
-    <a href="https://arxiv.org/abs/2605.01536">📄 Paper</a>
+    <a href="https://dl.acm.org/doi/10.1145/3811323">📄 Paper</a>
+    <a href="https://arxiv.org/abs/2605.01536">📝 arXiv</a>
     <a href="https://github.com/MartensCedric/antipodal">💻 Code</a>
 </div>
 
@@ -210,15 +219,22 @@ _styles: >
 <div class="citation-box">
 <button class="copy-btn" onclick="navigator.clipboard.writeText(this.nextElementSibling.textContent).then(() => { this.textContent = '✓ Copied'; setTimeout(() => this.textContent = 'Copy', 2000); })">Copy</button>
 <pre>@article{Martens2026AntipodalWN,
-  title = {The Antipodal Method: Fast, Accurate, and Robust 3D Generalized Winding Numbers},
   author = {Martens, Cedric and Trettner, Philip and Bessmeltsev, Mikhail},
-  journal = {ACM Transactions on Graphics},
+  title = {The Antipodal Method: Fast, Accurate, and Robust 3D Generalized Winding Numbers},
+  year = {2026},
+  issue_date = {July 2026},
+  publisher = {Association for Computing Machinery},
+  address = {New York, NY, USA},
   volume = {45},
   number = {4},
-  articleno = {43},
-  year = {2026},
-  month = jul,
+  issn = {0730-0301},
+  url = {https://doi.org/10.1145/3811323},
   doi = {10.1145/3811323},
+  journal = {ACM Trans. Graph.},
+  month = jul,
+  articleno = {43},
+  numpages = {11},
+  keywords = {winding number, point containment query, robust geometry processing}
 }</pre>
 </div>
 

@@ -1,5 +1,5 @@
 metadata:
-  last_updated: '2026-06-10'
+  last_updated: '2026-07-13'
 papers:
   KxBEAaYAAAAJ:MXK_kJrjxJIC:
     citations: 0
@@ -10,6 +10,6 @@ papers:
     title: Reconstruction of machine-made shapes from bitmap sketches
     year: '2023'
   KxBEAaYAAAAJ:qjMakFHDy7sC:
-    citations: 4
+    citations: 7
     title: "One\u2010Shot Method for Computing Generalized Winding Numbers"
     year: '2025'

@@ -13,7 +13,7 @@ description: > # the ">" symbol means to ignore newlines until "footer_text:"
 footer_text: >
 keywords: cedric, martens, academic, publications # add your own keywords or leave empty
 lang: en # the language of your site (for example: en, fr, cn, ru, etc.)
-icon: 📚 # the emoji used as the favicon (alternatively, provide image name in /assets/img/)
+icon: favicon-192.png # image name in /assets/img/ used as the favicon (an emoji works too, but Google Search cannot crawl the data: URI it produces)
 
 url: https://cedricmartens.com # the base hostname & protocol for your site
 baseurl: # the subpath of your site, e.g. /blog/. Leave blank for root
@@ -83,6 +83,11 @@ pirsch_analytics: # your Pirsch analytics site ID (length 32 characters)
 openpanel_analytics: # your Openpanel analytics client ID (format: XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX)
 
 # For Google Search Console, see https://support.google.com/webmasters/answer/9008080?hl=en#meta_tag_verification&zippy=%2Chtml-tag
+# NOTE: to verify via the HTML tag, paste the token below AND set
+# `enable_google_verification: true` further down -- metadata.liquid gates on the
+# boolean, so the token alone does nothing. You can skip both entirely by
+# verifying with the "Google Analytics" method instead, since G-YZRBJR9SH6 above
+# is already on every page.
 google_site_verification: # your google-site-verification ID (Google Search Console)
 bing_site_verification: # out your bing-site-verification ID (Bing Webmaster)
 
@@ -129,16 +134,6 @@ disqus_shortname: al-folio # put your disqus shortname
 # you can display them in your blog by adding a link to the RSS feed.
 # Optional: Set default categories and tags for posts from each source.
 external_sources:
-  - name: medium.com
-    rss_url: https://medium.com/@al-folio/feed
-    categories: [external-posts]
-    tags: [medium]
-  - name: Google Blog
-    posts:
-      - url: https://blog.google/technology/ai/google-gemini-update-flash-ai-assistant-io-2024/
-        published_date: 2024-05-14
-    categories: [external-posts]
-    tags: [google]
 
 # -----------------------------------------------------------------------------
 # Newsletter
@@ -154,12 +149,12 @@ newsletter:
 # -----------------------------------------------------------------------------
 
 collections:
-  books:
-    output: true
   news:
     defaults:
       layout: post
-    output: true
+    # Announcements render inline on the about page, so they need no standalone
+    # pages -- emitting them only put thin, unlinked URLs in the sitemap.
+    output: false
   projects:
     output: true
   teachings:
@@ -204,6 +199,9 @@ exclude:
   - CLAUDE.md
   - README.md
   - readme_preview/
+  # A 17 MB standalone export of the One-Shot page, superseded by
+  # /publications/1s_wn. Kept in the repo, but no longer published or crawled.
+  - static_site/
   - vendor
 keep_files:
   - CNAME
@@ -269,8 +267,6 @@ jekyll-archives:
       year: "/blog/:year/"
       tags: "/blog/:type/:name/"
       categories: "/blog/:type/:name/"
-  books:
-    enabled: [year, tags, categories] # enables year, tag and category archives (remove if you need to disable one of them).
 
 display_tags: ["formatting", "images", "links", "math", "code", "blockquotes"] # these tags will be displayed on the front page of your blog
 display_categories: ["external-services"] # these categories will be displayed on the front page of your blog
@@ -400,7 +396,7 @@ enable_google_analytics: true # enables google analytics
 enable_cronitor_analytics: false # enables cronitor RUM analytics
 enable_pirsch_analytics: false # enables Pirsch analytics (https://pirsch.io/)
 enable_openpanel_analytics: false # enables Openpanel analytics (https://openpanel.dev/)
-enable_google_verification: false # enables google site verification
+enable_google_verification: false # enables google site verification (also needs google_site_verification set above)
 enable_bing_verification: false # enables bing site verification
 enable_masonry: true # enables automatic project cards arrangement
 enable_math: true # enables math typesetting (uses MathJax)

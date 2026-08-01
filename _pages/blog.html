@@ -4,6 +4,10 @@ title: Blog
 nav: true
 nav_order: 5
 dropdown: true
+# This page has no body -- it only exists to define the navbar dropdown, which
+# renders as href="#". It builds to _pages/blog/index.html, a path GitHub Pages
+# refuses to serve, so it must stay out of the sitemap.
+sitemap: false
 # List each blog post here as a child. Use short_name as the title.
 children:
   - title: One-Shot in 2D

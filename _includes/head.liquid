@@ -64,8 +64,16 @@
     href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>{{ site.icon }}</text></svg>"
   >
 {% elsif site.icon != blank %}
-  <link rel="shortcut icon" href="{{ site.icon | prepend: '/assets/img/' | relative_url | bust_file_cache}}">
+  {% comment %}
+    Deliberately not cache-busted: Google Search only picks up a favicon it can
+    crawl at a stable URL, and bust_file_cache moves that URL on every edit.
+  {% endcomment %}
+  <link rel="icon" type="image/png" sizes="192x192" href="{{ site.icon | prepend: '/assets/img/' | relative_url }}">
 {% endif %}
+<!-- Where Google looks first, and what browsers request unprompted. -->
+<link rel="icon" href="{{ '/favicon.ico' | relative_url }}" sizes="any">
+<link rel="apple-touch-icon" sizes="180x180" href="{{ '/assets/img/apple-touch-icon.png' | relative_url }}">
+<!-- Regenerate all of the above with: .venv/bin/python scripts/make_favicon.py -->
 <link rel="stylesheet" href="{{ '/assets/css/main.css' | relative_url | bust_css_cache }}">
 <link rel="canonical" href="{% if page.canonical_url %}{{ page.canonical_url }}{% else %}{{ page.url | replace:'index.html','' | absolute_url }}{% endif %}">
 

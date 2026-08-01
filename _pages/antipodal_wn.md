@@ -6,6 +6,7 @@ permalink: /publications/antipodal_wn
 nav: false
 
 description: We introduce the antipodal method, a fast and accurate algorithm for computing generalized winding numbers for meshes and parametric surfaces, achieving up to 22× speedup over precise CPU methods and 10⁹ queries/second on GPU.
+keywords: antipodal method, generalized winding numbers, winding number, geometry processing, computer graphics, SIGGRAPH 2026, parametric surfaces, point insidedness, Cedric Martens
 teaser: /assets/img/antipodal_wn/teaser.png
 authors: Cedric Martens, Philip Trettner, and Mikhail Bessmeltsev
 paper_info: ACM Transactions on Graphics (SIGGRAPH 2026)
@@ -176,7 +177,7 @@ _styles: >
   
   <div class="author-container">
     <div class="author">
-        <a href="https://martenscedric.github.io/academic-page/">Cedric Martens</a><sup>*,1</sup>
+        <a href="{{ '/' | relative_url }}">Cedric Martens</a><sup>*,1</sup>
     </div>
     <div class="author">
         <a href="https://www.graphics.rwth-aachen.de/person/248/">Philip Trettner</a><sup>*,2</sup>

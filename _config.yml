@@ -155,10 +155,6 @@ collections:
     # Announcements render inline on the about page, so they need no standalone
     # pages -- emitting them only put thin, unlinked URLs in the sitemap.
     output: false
-  projects:
-    output: true
-  teachings:
-    output: true
 
 # -----------------------------------------------------------------------------
 # Jekyll settings

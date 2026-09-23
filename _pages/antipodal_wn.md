@@ -239,5 +239,17 @@ _styles: >
 }</pre>
 </div>
 
+##### Comparison with Fast and Exact Winding Numbers (FEWN)
+
+Concurrent to our work, FEWN (Xie, 2026) also provides a method to compute generalized winding numbers.
+We benchmark against it on all 1,789 open meshes of Thingi10K.
+Each mesh is evaluated on a 16³ grid of query points over its padded bounding box, single-threaded for both methods.
+Speedups are FEWN time / our time per mesh:
+
+<p align="center">
+  <img src="/assets/img/antipodal_wn/speedup_histogram_fewn.png" width="48%" alt="Query speedup over FEWN">
+  <img src="/assets/img/antipodal_wn/fewn_scatter_boundaries.png" width="48%" alt="Query throughput vs. boundary size">
+</p>
+
 <article>
 </article>
